@@ -1,4 +1,9 @@
 # ignore
-.venv/
+.venv
+app/__pycache__
+app/config/__pycache__
 app/config/settings.py
+app/controllers/__pycache__
+app/services/__pycache__
+app/utils/__pycache__
 .DS_Store
