@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inhaltsverzeichnis</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="../static/img/favicon.ico">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img title="ZHAW" src="../static/img/zhaw_logo.png" />
+                    <a id="app-title" href="/" class="h1">HSB TOC-Enricher</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    <fieldset>
+                        <legend><h1>Inhaltsverzeichnis hochgeladen</h1></legend>
+                        {% if session_service.has_message('success') %}
+                        <div class="alert-success p-1 mb-2">
+                            <p class="lead mb-0">{{ session_service.get_message('success') }}</p>
+                        </div>
+                        {% endif %}
+                        <p class="lead">
+                            Strichcode des Exemplars: {{ barcode }}
+                        </p>
+                        <label for="network_id">
+                            Datensatz
+                        </label>
+                        <div class="input-group mb-3">
+                            <input title="Network Id" type="text" value="{{ id }}" id="network_id" class="form-control cp-txt-field" />
+                            <button title="kopieren" type="button" onclick="cpTextFunc('network_id')" class="btn btn-primary input-group-append">
+                                kopieren
+                            </button>
+                        </div>
+                        {% if url %}
+                        <label for="marc_data">
+                            Feld <span class="is-red">856 42</span>
+                        </label>
+                        <div class="input-group mb-3">
+                            <input title="MARC XML" type="text" value="{{ marc }}" id="marc_data" class="form-control cp-txt-field" />
+                            <button title="kopieren" type="button" onclick="cpTextFunc('marc_data')" class="btn btn-primary input-group-append">
+                                kopieren
+                            </button>
+                        </div>
+                        <div class="text-end">
+                            <a href="{{ url }}" class="btn btn-primary" target=\"_blank\" id="toc-link">Link zum Inhaltsverzeichnis</a>
+                        </div>
+                        {% endif %}
+                        <div class="text-start">
+                            <a href="/" class="btn btn-primary" id="back">zurück</a>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 text-start">
+                    <div>© ZHAW HSB Winterthur</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+function cpTextFunc(field) {
+  var copyText = document.getElementById(field);
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+}
+    </script>
+</body>
+
+</html>
